@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose');
+const Content = require('./Content');
+
 
 const categorySchema = new Schema({
   // name: guilds
@@ -14,6 +16,10 @@ const categorySchema = new Schema({
   contentSchema: {
     type: Object,
     default: {}
+  },
+  tags: {
+    type: Array,
+    default: [],
   }
 })
 

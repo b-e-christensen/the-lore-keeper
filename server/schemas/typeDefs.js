@@ -8,6 +8,29 @@ const typeDefs = gql`
     password: String
   }
 
+  type Tag {
+    name: String
+  }
+
+  type Category {
+    _id: ID
+    name: String
+    content: [Content]!
+    contentSchema: String
+    tags: [Tag]!
+  }
+
+  type Content {
+    _id: ID
+    name: String
+    description: [Description]!
+    tags: [Tag]!
+  }
+
+  type Description {
+    description: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -16,11 +39,16 @@ const typeDefs = gql`
   type Query {
     user: User
     me: User
+    categories: [Category]
+    contents: [Content]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addCategory(name: String!): Category
+    addContent(name: String!, category_id: String!): Content
+    addTag(nameOfTag: String!, _id: String!): Content
   }
 `;
 

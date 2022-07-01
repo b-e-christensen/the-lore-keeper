@@ -8,11 +8,13 @@ const contentSchema = new Schema({
     trim: true,
   },
   description: {
+    type: Array,
     default: []
   },
-  tags: [{
-    name: String,
-  }]
+  tags: {
+    type: Array,
+    default: [],
+  }
 })
 
 const Content = model('Content', contentSchema);
