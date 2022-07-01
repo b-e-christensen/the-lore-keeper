@@ -10,6 +10,9 @@ const contentSchema = new Schema({
   description: {
     default: []
   },
+  tags: [{
+    name: String,
+  }]
 })
 
 const Content = model('Content', contentSchema);
