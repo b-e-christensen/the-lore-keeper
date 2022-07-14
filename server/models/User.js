@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const File = require('./File');
 
 const userSchema = new Schema({
   username: {
@@ -19,6 +20,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  files: { type: Array, ref: File }
 });
 
 userSchema.pre('save', async function (next) {

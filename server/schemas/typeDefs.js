@@ -6,29 +6,34 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    files: [File]
+  }
+
+  type File {
+    _id: ID
+    name: String
+    categories: [Category]
   }
 
   type Tag {
+    name: String
+  }
+  
+  type Description {
+    name: String
+    description: String
+  }
+
+  type Nests {
     name: String
   }
 
   type Category {
     _id: ID
     name: String
-    content: [Content]!
-    contentSchema: String
-    tags: [Tag]!
-  }
-
-  type Content {
-    _id: ID
-    name: String
-    description: [Description]!
-    tags: [Tag]!
-  }
-
-  type Description {
-    description: String
+    description: [Description]
+    tags: [Tag]
+    nestedDocuments: [Nests]
   }
 
   type Auth {
@@ -37,18 +42,18 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User
+    user: [User]
     me: User
     categories: [Category]
-    contents: [Content]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addCategory(name: String!): Category
-    addContent(name: String!, category_id: String!): Content
-    addTag(nameOfTag: String!, _id: String!): Content
+    addFile(name: String!, user_id: String!, parentCategory: String!): File
+    addCategory(name: String!, file_id: String!, parentCategory_id: String!): Category
+    addTag(firstCategory_id: String!, secondCategory_id: String!, file_id: String!): Category
+    addDescription(category_id: String!, name: String!, description: String!): Category
   }
 `;
 

@@ -1,26 +1,23 @@
 const { Schema, model } = require('mongoose');
-const Content = require('./Content');
-
 
 const categorySchema = new Schema({
-  // name: guilds
   name: {
     type: String,
     required: true,
     unique: true,
     trim: true,
   },
-  // content: reference of  ---> crafting guild, mining guild, etc.
-  content: { type: Array, ref: Content },
-  // user creates schema FOR ALL GUILDS, we pull that when user wants to make another Content for this category.
-  contentSchema: {
-    type: Object,
-    default: {}
-  },
+  description: [{
+    name: String,
+    description: String
+  }],
   tags: {
     type: Array,
     default: [],
-  }
+  },
+  nestedDocuments: [{
+    name: String
+  }]
 })
 
 const Category = model('Category', categorySchema);

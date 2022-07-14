@@ -1,5 +1,5 @@
 const User = require('./User');
 const Category = require('./Category')
-const Content = require('./Content')
+const File = require('./File')
 
-module.exports = { User, Category, Content };
+module.exports = { User, Category, File };
